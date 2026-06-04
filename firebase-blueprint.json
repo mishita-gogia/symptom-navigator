@@ -1,0 +1,71 @@
+{
+  "entities": {
+    "TriageAssessment": {
+      "title": "Triage Assessment",
+      "description": "Records of AI-powered triage assessments.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "UID of the user who performed the triage." },
+        "symptoms": { "type": "string", "description": "The symptoms described by the user." },
+        "clinicalHistory": { "type": "string", "description": "Past medical history provided by the user." },
+        "assessment": { "type": "string", "description": "The AI generated markdown assessment." },
+        "urgency": { "type": "string", "enum": ["EMERGENCY", "URGENT", "SELF-CARE", "ROUTINE"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["symptoms", "assessment", "urgency", "createdAt"]
+    },
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "Stored clinical history and profile info for a user.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "Patient's full name." },
+        "age": { "type": "integer", "description": "Patient's age." },
+        "gender": { "type": "string", "description": "Patient's gender." },
+        "clinicalHistory": { "type": "string", "description": "Saved medical history to be used in future triages." }
+      },
+      "required": ["name", "age", "gender", "clinicalHistory"]
+    },
+    "Appointment": {
+      "title": "Appointment",
+      "description": "Doctor appointments scheduled by the user.",
+      "type": "object",
+      "properties": {
+        "doctor": { "type": "string", "description": "Name of the doctor." },
+        "specialty": { "type": "string", "description": "Medical specialty." },
+        "date": { "type": "string", "description": "Date of appointment." },
+        "time": { "type": "string", "description": "Time of appointment." }
+      },
+      "required": ["doctor", "specialty", "date", "time"]
+    },
+    "Medication": {
+      "title": "Medication",
+      "description": "Active medications registered by the user.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "Name of the medication." },
+        "dosage": { "type": "string", "description": "Dosage details." },
+        "frequency": { "type": "string", "description": "Frequency of intake." }
+      },
+      "required": ["name", "dosage", "frequency"]
+    }
+  },
+  "firestore": {
+    "/triage_assessments/{assessmentId}": {
+      "schema": "TriageAssessment",
+      "description": "Collection of triage results."
+    },
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User specific clinical history."
+    },
+    "/appointments/{appointmentId}": {
+      "schema": "Appointment",
+      "description": "User-scheduled appointments."
+    },
+    "/medications/{medicationId}": {
+      "schema": "Medication",
+      "description": "User active medications."
+    }
+  }
+}

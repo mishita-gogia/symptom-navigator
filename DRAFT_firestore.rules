@@ -1,0 +1,92 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 1. Global Safety Net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // --- Helper Functions ---
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    // --- Validation Helpers ---
+    function isValidTriageAssessment(data) {
+      return data.keys().hasAll(['symptoms', 'assessment', 'urgency', 'createdAt'])
+        && data.keys().size() <= 6
+        && data.symptoms is string && data.symptoms.size() <= 2000
+        && data.assessment is string && data.assessment.size() <= 5000
+        && data.urgency in ['EMERGENCY', 'URGENT', 'SELF-CARE', 'ROUTINE']
+        && data.createdAt == request.time
+        && (data.userId == null || data.userId == request.auth.uid)
+        && (!data.keys().hasAny(['clinicalHistory']) || (data.clinicalHistory is string && data.clinicalHistory.size() <= 1000));
+    }
+
+    function isValidUserProfile(data) {
+      return data.keys().hasAll(['name', 'age', 'gender', 'clinicalHistory'])
+        && data.keys().size() == 4
+        && data.name is string && data.name.size() <= 100
+        && data.age is int && data.age >= 0 && data.age <= 130
+        && data.gender is string && data.gender.size() <= 50
+        && data.clinicalHistory is string && data.clinicalHistory.size() <= 5000;
+    }
+
+    function isValidAppointment(data) {
+      return data.keys().hasAll(['doctor', 'specialty', 'date', 'time'])
+        && data.keys().size() == 4
+        && data.doctor is string && data.doctor.size() <= 100
+        && data.specialty is string && data.specialty.size() <= 100
+        && data.date is string && data.date.size() <= 100
+        && data.time is string && data.time.size() <= 100;
+    }
+
+    function isValidMedication(data) {
+      return data.keys().hasAll(['name', 'dosage', 'frequency'])
+        && data.keys().size() == 3
+        && data.name is string && data.name.size() <= 100
+        && data.dosage is string && data.dosage.size() <= 100
+        && data.frequency is string && data.frequency.size() <= 100;
+    }
+
+    // --- Collection Rules ---
+
+    match /triage_assessments/{assessmentId} {
+      allow create: if isValidTriageAssessment(incoming());
+      allow get, list: if true; // Allow reading assessments (filtered by client or for demo)
+    }
+
+    match /users/{userId} {
+      allow get: if true;
+      allow create, update: if isValidUserProfile(incoming()) || userId == 'me_metrics';
+    }
+
+    match /appointments/{appointmentId} {
+      allow read: if true;
+      allow create, update: if isValidAppointment(incoming());
+      allow delete: if true;
+    }
+
+    match /medications/{medicationId} {
+      allow read: if true;
+      allow create, update: if isValidMedication(incoming());
+      allow delete: if true;
+    }
+  }
+}
