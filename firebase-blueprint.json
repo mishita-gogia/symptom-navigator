@@ -20,7 +20,7 @@
       "type": "object",
       "properties": {
         "name": { "type": "string", "description": "Patient's full name." },
-        "age": { "type": "integer", "description": "Patient's age." },
+        "age": { "type": "number", "description": "Patient's age." },
         "gender": { "type": "string", "description": "Patient's gender." },
         "clinicalHistory": { "type": "string", "description": "Saved medical history to be used in future triages." }
       },

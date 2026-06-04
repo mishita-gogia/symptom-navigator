@@ -1,10 +1,7 @@
 {
-  "name": "Remix: Symptom Navigator",
+  "name": "Symptom Navigator",
   "description": "An AI-powered symptom triage and healthcare help navigator to help you assess symptoms and find nearby care.",
-  "requestFramePermissions": [
-    "geolocation",
-    "microphone"
-  ],
+  "requestFramePermissions": [],
   "majorCapabilities": [
     "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
   ]
