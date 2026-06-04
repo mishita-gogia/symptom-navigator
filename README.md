@@ -7,7 +7,7 @@ An AI-powered healthcare assistance platform that helps users analyze symptoms, 
 ## 🌐 Live Demo
 
 🔗 **Deployed Application:**  
-[Add Deployment Link Here]([https://your-deployment-link.com](https://symptom-navigator.vercel.app/))
+[Click here to view Deployed Website](https://symptom-navigator.vercel.app/)
 
 ---
 
@@ -75,35 +75,35 @@ The platform further enhances accessibility by helping users locate nearby healt
 
 ### Home Page
 
-![Home Page]<img width="1919" height="1199" alt="image" src="https://github.com/user-attachments/assets/ff6b10d4-59fc-4901-8db2-bae7daab402d" />
+<img width="1919" height="1199" alt="image" src="https://github.com/user-attachments/assets/ff6b10d4-59fc-4901-8db2-bae7daab402d" />
 
 
 ---
 
 ### Symptom Selection
 
-![Symptom Selection]<img width="938" height="689" alt="image" src="https://github.com/user-attachments/assets/324f1dfd-7373-4660-a92e-3f125090e2da" />
+<img width="938" height="689" alt="image" src="https://github.com/user-attachments/assets/324f1dfd-7373-4660-a92e-3f125090e2da" />
 
 
 ---
 
 ### Symptom Calmer
 
-![Symptom Calmer]<img width="1402" height="748" alt="image" src="https://github.com/user-attachments/assets/013c93ea-7fe6-44e3-a8ba-f31e1f7890f6" />
+<img width="1402" height="748" alt="image" src="https://github.com/user-attachments/assets/013c93ea-7fe6-44e3-a8ba-f31e1f7890f6" />
 
 
 ---
 
 ### Healthcare Facilities
 
-![Healthcare Facilities]<img width="1418" height="715" alt="image" src="https://github.com/user-attachments/assets/21bb30e5-832c-49f9-bd2f-c1fd30a83166" />
+<img width="1418" height="715" alt="image" src="https://github.com/user-attachments/assets/21bb30e5-832c-49f9-bd2f-c1fd30a83166" />
 
 
 ---
 
 ### Mobile View
 
-![Mobile View]<img width="436" height="760" alt="image" src="https://github.com/user-attachments/assets/ea1f8932-365a-4390-a3f7-668f514145ed" />
+<img width="436" height="760" alt="image" src="https://github.com/user-attachments/assets/ea1f8932-365a-4390-a3f7-668f514145ed" />
 
 
 ---
